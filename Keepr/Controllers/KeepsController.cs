@@ -81,5 +81,21 @@ namespace Keepr.Controllers
                 return BadRequest(err.Message);
             }
         }
+
+        [HttpDelete]
+        [Authorize]
+        public async Task<ActionResult<String>> Delete(int id)
+        {
+            try
+            {
+                Account userInfo = await HttpContext.GetUserInfoAsync<Account>();
+                _keepsService.Delete(id, userInfo.Id);
+                return Ok("Successfully Deleted");
+            }
+            catch (Exception err)
+            {
+                return BadRequest(err.Message);
+            }
+        }    
     }
 }

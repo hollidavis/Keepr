@@ -38,13 +38,23 @@ namespace Keepr.Services
       Keep original = Get(updatedKeep.Id);
       if(original.CreatorId != updatedKeep.CreatorId)
       {
-          throw new Exception("This is not your Keep");
+          throw new Exception("This is not your keep!");
       }
       original.Name = updatedKeep.Name != null ? updatedKeep.Name : original.Name;
       original.Description = updatedKeep.Description != null ? updatedKeep.Description : original.Description;
       original.Img = updatedKeep.Img != null ? updatedKeep.Img : original.Img;
       _repo.Edit(original);
       return original;
+    }
+
+    internal void Delete(int keepId, string userId)
+    {
+      Keep toBeDeleted = Get(keepId);
+      if(toBeDeleted.CreatorId != userId)
+      {
+          throw new Exception("This is not your keep!");
+      }
+      _repo.Delete(keepId);
     }
   }
 }
