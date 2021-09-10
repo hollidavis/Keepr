@@ -53,10 +53,10 @@ namespace Keepr.Controllers
         {
             try
             {
-                 Account userInfo = await HttpContext.GetUserInfoAsync<Account>();
-                 newKeep.CreatorId = userInfo.Id;
-                 Keep keep = _keepsService.Create(newKeep);
-                 return Ok(keep);
+                Account userInfo = await HttpContext.GetUserInfoAsync<Account>();
+                newKeep.CreatorId = userInfo.Id;
+                Keep keep = _keepsService.Create(newKeep);
+                return Ok(keep);
             }
             catch (Exception err)
             {

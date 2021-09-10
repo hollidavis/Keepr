@@ -21,8 +21,18 @@ namespace Keepr.Repositories
 
     internal Keep GetById(int id)
     {
-      string sql = "SELECT * FROM keeps WHERE id = @id;";
-      return _db.QueryFirstOrDefault<Keep>(sql, new { id });
+      string sql = @"
+      SELECT 
+      a.*,
+      k.*
+      FROM keeps k
+      JOIN accounts a ON a.id = r.creatorId
+      WHERE r.id = @id;";
+      return _db.Query<Profile, Keep, Keep>(sql, (prof, keep) =>
+      {
+          keep.Creator = prof;
+          return keep;
+      }, new{id}, splitOn: "id").FirstOrDefault();
     }
 
     internal Keep Create(Keep newKeep)
@@ -35,7 +45,7 @@ namespace Keepr.Repositories
       SELECT LAST_INSERT_ID();
       ";
       newKeep.Id = _db.ExecuteScalar<int>(sql, newKeep);
-      return newKeep;
+      return GetById(newKeep.Id);
     }
   }
 }
