@@ -12,12 +12,16 @@ namespace Keepr.Services
         _repo = repo;
     }
 
-    internal Vault Get(int id)
+    internal Vault Get(int id, string userId)
     {
       Vault vault = _repo.GetById(id);
       if(vault == null)
       {
           throw new Exception("Invalid Id");
+      }
+      if(vault.IsPrivate == true && vault.CreatorId != userId)
+      {
+          throw new Exception("This is not your vault");
       }
       return vault;
     }
@@ -29,7 +33,7 @@ namespace Keepr.Services
 
     internal Vault Edit(Vault updatedVault)
     {
-      Vault original = Get(updatedVault.Id);
+      Vault original = Get(updatedVault.Id, updatedVault.CreatorId);
       if(original.CreatorId != updatedVault.CreatorId)
       {
           throw new Exception("This is not your vault!");
@@ -44,7 +48,7 @@ namespace Keepr.Services
 
     internal void Delete(int vaultId, string userId)
     {
-      Vault toBeDeleted = Get(vaultId);
+      Vault toBeDeleted = Get(vaultId, userId);
       if(toBeDeleted.CreatorId != userId)
       {
           throw new Exception("This is not your vault!");
