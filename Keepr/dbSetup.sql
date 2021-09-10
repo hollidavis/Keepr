@@ -11,7 +11,7 @@ CREATE TABLE IF NOT EXISTS keeps(
   id INT NOT NULL AUTO_INCREMENT primary key COMMENT 'primary key',
   name varchar(255) NOT NULL COMMENT 'Keep Name',
   description varchar(5000) DEFAULT 'Description not provided...' COMMENT 'Keep Description',
-  img varchar(500) COMMENT 'Keep Image'
+  img varchar(500) COMMENT 'Keep Image',
   views INT DEFAULT 0 COMMENT 'Keep View Count',
   shares INT DEFAULT 0 COMMENT 'Keep Share Count',
   keeps INT DEFAULT 0 COMMENT 'Keep Saved Count',
@@ -35,5 +35,5 @@ CREATE TABLE IF NOT EXISTS vaultKeeps(
   keepId INT NOT NULL COMMENT 'Vault Id',
   FOREIGN KEY (creatorId) REFERENCES accounts(id) ON DELETE CASCADE,
   FOREIGN KEY (vaultId) REFERENCES vaults(id) ON DELETE CASCADE,
-  FOREIGN KEY (keepId) REFERENCES keeps(id) ON DELETE CASCADE,
+  FOREIGN KEY (keepId) REFERENCES keeps(id) ON DELETE CASCADE
 ) default charset utf8 COMMENT '';
