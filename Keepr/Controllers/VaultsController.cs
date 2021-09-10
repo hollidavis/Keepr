@@ -1,6 +1,10 @@
+using Microsoft.AspNetCore.Mvc;
+
 namespace Keepr.Controllers
 {
-    public class VaultsController
+    [ApiController]
+    [Route("/api/[controller]")]
+    public class VaultsController : ControllerBase
     {
         
     }

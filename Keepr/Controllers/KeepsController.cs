@@ -96,6 +96,6 @@ namespace Keepr.Controllers
             {
                 return BadRequest(err.Message);
             }
-        }    
+        }
     }
 }
