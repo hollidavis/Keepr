@@ -26,8 +26,8 @@ namespace Keepr.Repositories
       a.*,
       k.*
       FROM keeps k
-      JOIN accounts a ON a.id = r.creatorId
-      WHERE r.id = @id;";
+      JOIN accounts a ON a.id = k.creatorId
+      WHERE k.id = @id;";
       return _db.Query<Profile, Keep, Keep>(sql, (prof, keep) =>
       {
           keep.Creator = prof;
