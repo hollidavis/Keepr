@@ -32,5 +32,19 @@ namespace Keepr.Services
     {
       return _repo.Create(newKeep);
     }
+
+    internal Keep Edit(Keep updatedKeep)
+    {
+      Keep original = Get(updatedKeep.Id);
+      if(original.CreatorId != updatedKeep.CreatorId)
+      {
+          throw new Exception("This is not your Keep");
+      }
+      original.Name = updatedKeep.Name != null ? updatedKeep.Name : original.Name;
+      original.Description = updatedKeep.Description != null ? updatedKeep.Description : original.Description;
+      original.Img = updatedKeep.Img != null ? updatedKeep.Img : original.Img;
+      _repo.Edit(original);
+      return original;
+    }
   }
 }
