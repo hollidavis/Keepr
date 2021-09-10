@@ -52,6 +52,9 @@
       "titleBar.inactiveBackground": "#6485b999",
       "titleBar.inactiveForeground": "#15202b99"
     },
-    "peacock.color": "#6485b9"
+    "peacock.color": "#6485b9",
+    "cSpell.words": [
+      "Keepr"
+    ]
   }
 }
