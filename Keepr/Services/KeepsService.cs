@@ -27,5 +27,10 @@ namespace Keepr.Services
       }
       return keep;
     }
+
+    internal Keep Create(Keep newKeep)
+    {
+      return _repo.Create(newKeep);
+    }
   }
 }

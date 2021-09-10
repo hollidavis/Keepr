@@ -24,5 +24,18 @@ namespace Keepr.Repositories
       string sql = "SELECT * FROM keeps WHERE id = @id;";
       return _db.QueryFirstOrDefault<Keep>(sql, new { id });
     }
+
+    internal Keep Create(Keep newKeep)
+    {
+      string sql = @"
+      INSERT INTO keeps
+      (name, description, img, creatorId)
+      VALUES
+      (@Name, @Description, @Img, @CreatorId);
+      SELECT LAST_INSERT_ID();
+      ";
+      newKeep.Id = _db.ExecuteScalar<int>(sql, newKeep);
+      return newKeep;
+    }
   }
 }

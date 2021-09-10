@@ -1,7 +1,10 @@
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
+using CodeWorks.Auth0Provider;
 using Keepr.Models;
 using Keepr.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Keepr.Controllers
@@ -36,6 +39,23 @@ namespace Keepr.Controllers
             try
             {
                  Keep keep = _keepsService.Get(id);
+                 return Ok(keep);
+            }
+            catch (Exception err)
+            {
+                return BadRequest(err.Message);
+            }
+        }
+
+        [HttpPost]
+        [Authorize]
+        public async Task<ActionResult<Keep>> Create([FromBody] Keep newKeep)
+        {
+            try
+            {
+                 Account userInfo = await HttpContext.GetUserInfoAsync<Account>();
+                 newKeep.CreatorId = userInfo.Id;
+                 Keep keep = _keepsService.Create(newKeep);
                  return Ok(keep);
             }
             catch (Exception err)
