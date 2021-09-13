@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Keepr.Models;
 using Keepr.Repositories;
 
@@ -27,6 +28,16 @@ namespace Keepr.Services
                 return _repo.Create(userInfo);
             }
             return profile;
+        }
+
+        internal Profile GetProfileById(string profileId)
+        {
+            return _repo.GetById(profileId);
+        }
+
+        internal List<Keep> GetProfileKeeps(string id)
+        {
+            return _repo.GetProfileKeeps(id);
         }
 
         internal Account Edit(Account editData, string userEmail)
