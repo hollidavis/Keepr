@@ -13,10 +13,14 @@ namespace Keepr.Controllers
     public class VaultKeepsController : ControllerBase
     {
         private readonly VaultKeepsService _vaultKeepsService;
+        private readonly VaultsService _vaultsService;
+        private readonly KeepsService _keepsService;
 
-        public VaultKeepsController(VaultKeepsService vaultKeepsService)
+        public VaultKeepsController(VaultKeepsService vaultKeepsService, VaultsService vaultsService, KeepsService keepsService)
         {
             _vaultKeepsService = vaultKeepsService;
+            _vaultsService = vaultsService;
+            _keepsService = keepsService;
         }
 
         [HttpGet("{id}")]
@@ -41,8 +45,14 @@ namespace Keepr.Controllers
             {
                 Account userInfo = await HttpContext.GetUserInfoAsync<Account>();
                 newVaultKeep.CreatorId = userInfo.Id;
-                VaultKeep vaultKeep = _vaultKeepsService.Create(newVaultKeep);
-                return Ok(vaultKeep);
+                Vault vault = _vaultsService.Get(newVaultKeep.VaultId, newVaultKeep.CreatorId);
+                Keep keep = _keepsService.Get(newVaultKeep.KeepId);
+                if(vault != null && keep.CreatorId == userInfo.Id){
+                    VaultKeep vaultKeep = _vaultKeepsService.Create(newVaultKeep);
+                    return Ok(vaultKeep);
+                } else {
+                    throw new Exception("Something went wrong...");
+                }
             }
             catch (Exception err)
             {
