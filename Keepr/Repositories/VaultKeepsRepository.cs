@@ -14,10 +14,26 @@ namespace Keepr.Repositories
         _db = db;
     }
 
-    internal List<VaultKeep> GetById(int id)
+    public VaultKeep GetOne(int id)
     {
-      string sql = "SELECT * FROM vaultKeeps WHERE id = @id;";
-      return _db.Query<VaultKeep>(sql).ToList();
+      string sql = "SELECT * FROM vaultKeeps WHERE id = @id";
+      return _db.QueryFirstOrDefault<VaultKeep>(sql, new { id });
+    }
+
+    internal List<VaultKeepViewModel> GetVaultKeeps(int id)
+    {
+      string sql = @"
+      SELECT 
+      a.*,
+      vk.*
+      FROM vaultKeeps vk
+      JOIN accounts a ON a.id = vk.creatorId
+      WHERE vk.id = @id;";
+      return _db.Query<Profile, VaultKeepViewModel, VaultKeepViewModel>(sql, (prof, vkvm) =>
+      {
+          vkvm.Creator = prof;
+          return vkvm;
+      }, new{id}, splitOn: "id").ToList();
     }
 
     internal VaultKeep Create(VaultKeep newVaultKeep)

@@ -22,6 +22,20 @@ namespace Keepr.Controllers
             _vaultKeepsService = vaultKeepsService;
         }
         
+        [HttpGet("{vaultId}/keeps")]
+        public ActionResult<List<VaultKeepViewModel>> GetKeeps(int vaultId)
+        {
+            try
+            {
+                 List<VaultKeepViewModel> vaultKeeps = _vaultKeepsService.GetVaultKeeps(vaultId);
+                 return Ok(vaultKeeps);
+            }
+            catch (Exception err)
+            {
+                return BadRequest(err.Message);
+            }
+        }
+
         [HttpGet("{id}")]
         public async Task<ActionResult<Vault>> GetAsync(int id)
         {
@@ -30,20 +44,6 @@ namespace Keepr.Controllers
                 Account userInfo = await HttpContext.GetUserInfoAsync<Account>();
                 Vault vault = _vaultsService.Get(id, userInfo?.Id);
                 return Ok(vault);
-            }
-            catch (Exception err)
-            {
-                return BadRequest(err.Message);
-            }
-        }
-
-        [HttpGet("{id}/keeps")]
-        public ActionResult<List<VaultKeep>> Get(int id)
-        {
-            try
-            {
-                 List<VaultKeep> vaultKeeps = _vaultKeepsService.Get(id);
-                 return Ok(vaultKeeps);
             }
             catch (Exception err)
             {

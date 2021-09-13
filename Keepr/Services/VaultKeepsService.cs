@@ -13,14 +13,14 @@ namespace Keepr.Services
         _repo = repo;
     }
 
-    internal List<VaultKeep> Get(int id)
+    internal VaultKeep GetOne(int id)
     {
-      VaultKeep found = _repo.GetById(id);
-      if (found == null)
-      {
-        throw new Exception("Invalid Id");
-      }
-      return found;
+      return _repo.GetOne(id);
+    }
+
+    internal List<VaultKeepViewModel> GetVaultKeeps(int id)
+    {
+      return _repo.GetVaultKeeps(id);
     }
 
     internal VaultKeep Create(VaultKeep newVaultKeep)
@@ -30,7 +30,7 @@ namespace Keepr.Services
 
     internal void Delete(int vaultKeepId, string userId)
     {
-      VaultKeep toBeDeleted = Get(vaultKeepId);
+      VaultKeep toBeDeleted = GetOne(vaultKeepId);
       if(toBeDeleted.CreatorId != userId)
       {
           throw new Exception("This is not yours!");

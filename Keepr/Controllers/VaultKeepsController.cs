@@ -19,6 +19,20 @@ namespace Keepr.Controllers
             _vaultKeepsService = vaultKeepsService;
         }
 
+        [HttpGet("{id}")]
+        public ActionResult<VaultKeep> GetOne(int id)
+        {
+            try
+            {
+                VaultKeep group = _vaultKeepsService.GetOne(id);
+                return Ok(group);
+            }
+            catch (System.Exception err)
+            {
+                return BadRequest(err.Message);
+            }
+        }
+
         [HttpPost]
         [Authorize]
         public async Task<ActionResult<VaultKeep>> Create([FromBody] VaultKeep newVaultKeep)
