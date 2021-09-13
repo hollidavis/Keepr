@@ -22,12 +22,12 @@ namespace Keepr.Controllers
             _vaultKeepsService = vaultKeepsService;
         }
         
-        [HttpGet("{vaultId}/keeps")]
-        public ActionResult<List<VaultKeepViewModel>> GetKeeps(int vaultId)
+        [HttpGet("{id}/keeps")]
+        public ActionResult<List<VaultKeepViewModel>> GetKeeps(int id)
         {
             try
             {
-                 List<VaultKeepViewModel> vaultKeeps = _vaultKeepsService.GetVaultKeeps(vaultId);
+                 List<VaultKeepViewModel> vaultKeeps = _vaultKeepsService.GetVaultKeeps(id);
                  return Ok(vaultKeeps);
             }
             catch (Exception err)
