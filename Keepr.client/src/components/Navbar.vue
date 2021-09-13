@@ -26,9 +26,9 @@
           </router-link>
         </li>
       </ul>
-      <span class="navbar-text text-light ">
+      <span class="navbar-text">
         <button
-          class="btn btn-outline-primary text-uppercase"
+          class="btn btn-outline-light text-uppercase"
           @click="login"
           v-if="!user.isAuthenticated"
         >
@@ -60,7 +60,7 @@
               </div>
             </router-link>
             <div
-              class="list-group-item list-group-item-action hoverable"
+              class="list-group-item list-group-item-action hoverable text-uppercase"
               @click="logout"
             >
               logout
