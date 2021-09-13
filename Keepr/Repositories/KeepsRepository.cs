@@ -55,7 +55,9 @@ namespace Keepr.Repositories
       SET
         name = @Name,
         description = @Description,
-        img = @Img
+        img = @Img,
+        views = @Views,
+        keeps = @Keeps
       WHERE id = @Id
       ;";
       _db.Execute(sql, updatedKeep);

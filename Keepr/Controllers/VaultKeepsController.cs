@@ -46,7 +46,8 @@ namespace Keepr.Controllers
                 Account userInfo = await HttpContext.GetUserInfoAsync<Account>();
                 newVaultKeep.CreatorId = userInfo.Id;
                 Vault vault = _vaultsService.Get(newVaultKeep.VaultId, newVaultKeep.CreatorId);
-                Keep keep = _keepsService.Get(newVaultKeep.KeepId);
+                Keep keep = _keepsService.GetOne(newVaultKeep.KeepId);
+                _keepsService.IncreaseKeepCount(keep);
                 if(vault != null && keep.CreatorId == userInfo.Id){
                     VaultKeep vaultKeep = _vaultKeepsService.Create(newVaultKeep);
                     return Ok(vaultKeep);
@@ -67,7 +68,10 @@ namespace Keepr.Controllers
             try
             {
                 Account userInfo = await HttpContext.GetUserInfoAsync<Account>();
+                VaultKeep toBeDeleted = _vaultKeepsService.GetOne(id);
+                Keep keep = _keepsService.GetOne(toBeDeleted.KeepId);
                 _vaultKeepsService.Delete(id, userInfo.Id);
+                _keepsService.DecreaseKeepCount(keep);
                 return Ok("Successfully Deleted");
             }
             catch (Exception err)

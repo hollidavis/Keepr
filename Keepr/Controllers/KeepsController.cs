@@ -34,11 +34,11 @@ namespace Keepr.Controllers
         }
         
         [HttpGet("{id}")]
-        public ActionResult<Keep> Get(int id)
+        public ActionResult<Keep> GetById(int id)
         {
             try
             {
-                 Keep keep = _keepsService.Get(id);
+                 Keep keep = _keepsService.GetById(id);
                  return Ok(keep);
             }
             catch (Exception err)
