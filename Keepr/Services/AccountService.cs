@@ -4,7 +4,7 @@ using Keepr.Repositories;
 
 namespace Keepr.Services
 {
-    public class AccountService
+  public class AccountService
     {
         private readonly AccountsRepository _repo;
         public AccountService(AccountsRepository repo)
@@ -35,9 +35,20 @@ namespace Keepr.Services
             return _repo.GetById(profileId);
         }
 
-        internal List<Keep> GetProfileKeeps(string id)
+        internal List<Keep> GetProfileKeeps(string profileId)
         {
-            return _repo.GetProfileKeeps(id);
+            return _repo.GetProfileKeeps(profileId);
+        }
+
+        internal List<Vault> GetProfileVaults(string profileId, string userId)
+        {
+            List<Vault> vaults = _repo.GetProfileVaults(profileId);
+            if(profileId == userId){
+                return vaults;
+            } else {
+                List<Vault> results = vaults.FindAll(v => v.IsPrivate == false);
+                return results;
+            }
         }
 
         internal Account Edit(Account editData, string userEmail)

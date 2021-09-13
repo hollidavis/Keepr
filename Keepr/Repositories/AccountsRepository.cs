@@ -21,10 +21,10 @@ namespace Keepr.Repositories
             return _db.QueryFirstOrDefault<Account>(sql, new { userEmail });
         }
 
-        internal Account GetById(string id)
+        internal Account GetById(string profileId)
         {
-            string sql = "SELECT * FROM accounts WHERE id = @id";
-            return _db.QueryFirstOrDefault<Account>(sql, new { id });
+            string sql = "SELECT * FROM accounts WHERE id = @profileId";
+            return _db.QueryFirstOrDefault<Account>(sql, new { profileId });
         }
 
         internal List<Keep> GetProfileKeeps(string profileId)
@@ -40,6 +40,22 @@ namespace Keepr.Repositories
             {
                 keep.Creator = prof;
                 return keep;
+            }, new{profileId}, splitOn: "id").ToList();
+        }
+
+        internal List<Vault> GetProfileVaults(string profileId)
+        {
+            string sql = @"
+            SELECT 
+            a.*,
+            v.*
+            FROM vaults v
+            JOIN accounts a ON a.id = v.creatorId
+            WHERE v.creatorId = @profileId;";
+            return _db.Query<Profile, Vault, Vault>(sql, (prof, vault) =>
+            {
+                vault.Creator = prof;
+                return vault;
             }, new{profileId}, splitOn: "id").ToList();
         }
 
