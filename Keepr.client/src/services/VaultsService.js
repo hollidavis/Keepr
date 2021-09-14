@@ -11,6 +11,12 @@ class VaultsService {
     const found = AppState.keeps.find(k => k.id === keep.id)
     found.keeps++
   }
+
+  async createVault(newVault) {
+    const res = await api.post('api/vaults', newVault)
+    console.log(res.data)
+    // AppState.vaults.push(res.data)
+  }
 }
 
 export const vaultsService = new VaultsService()
