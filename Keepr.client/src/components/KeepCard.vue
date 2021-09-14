@@ -40,4 +40,11 @@ export default {
   height: 7vh;
   width: 7vh;
 }
+.hide {
+  display: none;
+}
+
+.creator:hover + .hide {
+  display: block;
+}
 </style>

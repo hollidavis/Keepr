@@ -6,7 +6,7 @@
        aria-labelledby="modelTitleId"
        aria-hidden="true"
   >
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title">
@@ -18,6 +18,7 @@
         </div>
         <div class="modal-body">
           <form @submit.prevent="createVault">
+            <!-- Title/Name -->
             <div class="form-group">
               <label for="title">Title</label>
               <input type="text"
@@ -28,6 +29,7 @@
                      required
               >
             </div>
+            <!-- Description -->
             <div class="form-group">
               <label for="description">Description</label>
               <input type="text"
@@ -37,6 +39,7 @@
                      placeholder="Title..."
               >
             </div>
+            <!-- Img Url -->
             <div class="form-group">
               <label for="image">Image Url</label>
               <input type="text"
@@ -47,6 +50,7 @@
                      required
               >
             </div>
+            <!-- Private -->
             <div class="form-group">
               <div class="d-flex align-items-center">
                 <label for="private" class="m-0 pr-2">Private?</label>
