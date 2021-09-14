@@ -16,13 +16,15 @@
         <div class="modal-body p-2" @click.stop="increaseViewCount">
           <div class="container-fluid">
             <div class="row">
-              <div class="col-md-6 p-0 d-flex justify-content-start">
+              <!-- Img -->
+              <div class="col-md-6 p-0">
                 <img class="img-fluid hero-img rounded" :src="keep.img" :alt="keep.name">
               </div>
-              <div class="col-md-6 p-0">
+              <!-- Info -->
+              <div class="col-md-6 d-flex flex-column">
                 <!-- Keep Stats -->
                 <div class="row">
-                  <div class="col-12 d-flex justify-content-center">
+                  <div class="col-12 d-flex justify-content-center align-items-center">
                     <p><span class="fas fa-eye fa-lg"></span> {{ keep.views }}</p>
                     <p class="px-3">
                       <span class="fab fa-korvue fa-lg"></span> {{ keep.keeps }}
@@ -31,8 +33,8 @@
                   </div>
                 </div>
                 <!-- Keep Text -->
-                <div class="row d-flex justify-content-center align-items-center">
-                  <div class="col-9 d-flex flex-grow-1">
+                <div class="row d-flex justify-content-center flex-grow-1">
+                  <div class="col-9">
                     <h1 class="text-center">
                       {{ keep.name }}
                     </h1>
@@ -43,35 +45,35 @@
                 </div>
                 <!-- Keep Buttons -->
                 <div class="row">
-                  <div class="col-12 d-flex align-items-center">
+                  <div class="col-12 d-flex align-items-center justify-content-center">
                     <!-- Select Vault -->
-                    <div>
-                      <form @submit.prevent="addKeepToVault">
-                        <select v-model="state.vault">
-                          <option v-for="v in vaults" :key="v.id" :value="v">
-                            {{ v.name }}
-                          </option>
-                          <option v-if="!vaults.length">
-                            No Vaults Yet
-                          </option>
-                        </select>
-                        <button type="submit" class="btn text-primary p-2">
-                          <span class="fas fa-save fa-lg"></span>
+                    <div class="row w-100">
+                      <div class="col-md-6 d-flex align-items-center">
+                        <form @submit.prevent="addKeepToVault" class="mr-auto">
+                          <select v-model="state.vault" class="pointer">
+                            <option v-for="v in vaults" :key="v.id" :value="v">
+                              {{ v.name }}
+                            </option>
+                            <option v-if="!vaults.length">
+                              No Vaults Yet
+                            </option>
+                          </select>
+                          <button type="submit" class="btn text-primary py-0 px-2">
+                            <span class="fas fa-save fa-lg"></span>
+                          </button>
+                        </form>
+                        <!-- Delete -->
+                        <button type="button" class="btn text-danger py-0 px-2" @click.stop="">
+                          <span class="fas fa-trash-alt fa-lg"></span>
                         </button>
-                      </form>
-                    </div>
-                    <!-- Delete -->
-                    <div>
-                      <button type="button" class="btn text-danger p-2" @click.stop="">
-                        <span class="fas fa-trash-alt fa-lg"></span>
-                      </button>
-                    </div>
-                    <!-- Creator Info -->
-                    <div class="d-flex align-items-center">
-                      <p class="m-0 pr-2">
-                        {{ keep.creator.name }}
-                      </p>
-                      <img class="rounded-pill profile" :src="keep.creator.picture" :alt="keep.creator.name">
+                      </div>
+                      <!-- Creator Info -->
+                      <div class="col-md-6 d-flex align-items-center">
+                        <p class="m-0 px-2 mr-auto">
+                          {{ keep.creator.name }}
+                        </p>
+                        <img class="rounded-pill profile" :src="keep.creator.picture" :alt="keep.creator.name">
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -114,6 +116,9 @@ export default {
 }
 .hero-img{
   max-height: 80vh;
+  min-width: 100%;
+  object-fit: cover;
+  object-position: center;
 }
 .line{
   border-bottom: 2px 2px black;
