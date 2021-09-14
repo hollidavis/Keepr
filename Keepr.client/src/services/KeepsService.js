@@ -18,6 +18,11 @@ class KeepsService {
     const found = AppState.keeps.filter(k => k.id !== id)
     AppState.keeps = found
   }
+
+  async createKeep(newKeep) {
+    const res = await api.post('api/keeps', newKeep)
+    AppState.keeps.push(res.data)
+  }
 }
 
 export const keepsService = new KeepsService()

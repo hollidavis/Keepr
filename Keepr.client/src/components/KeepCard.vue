@@ -1,12 +1,10 @@
 <template>
   <img class="card-img rounded pointer" :src="keep.img" :alt="keep.name" @click="increaseViewCount">
-  <div class="card-img-overlay black-gradient rounded pointer" @click="increaseViewCount">
-    <div class="d-flex justify-content-between align-items-center">
-      <h3 class="text-light m-0 text-shadow">
-        {{ keep.name }}
-      </h3>
-      <img class="rounded-pill profile" :src="keep.creator.picture" :alt="keep.creator.name">
-    </div>
+  <div class="card-img-overlay black-gradient rounded pointer d-flex justify-content-between align-items-start" @click="increaseViewCount">
+    <h3 class="text-light m-0 text-shadow">
+      {{ keep.name }}
+    </h3>
+    <img class="rounded-pill profile" :src="keep.creator.picture" :alt="keep.creator.name">
   </div>
   <KeepDetailsModal :keep="keep" />
 </template>
