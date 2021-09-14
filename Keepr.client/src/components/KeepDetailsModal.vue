@@ -46,9 +46,9 @@
                 <!-- Keep Buttons -->
                 <div class="row">
                   <div class="col-12 d-flex align-items-center justify-content-center">
-                    <!-- Select Vault -->
                     <div class="row w-100">
                       <div class="col-md-6 d-flex align-items-center justify-content-center py-2">
+                        <!-- Vault Form -->
                         <form @submit.prevent="addKeepToVault" class="d-flex mr-auto">
                           <select v-model="state.vault" class="pointer w-100">
                             <option v-for="v in vaults" :key="v.id" :value="v">
@@ -90,6 +90,8 @@
 import { reactive } from '@vue/reactivity'
 import { computed } from '@vue/runtime-core'
 import { AppState } from '../AppState'
+import Pop from '../utils/Notifier'
+import { vaultsService } from '../services/VaultsService'
 export default {
   props: {
     keep: {
@@ -97,14 +99,23 @@ export default {
       required: true
     }
   },
-  setup() {
+  setup(props) {
     const state = reactive({
       vault: {}
     })
     return {
       state,
       vaults: computed(() => AppState.vaults),
-      account: computed(() => AppState.account)
+      account: computed(() => AppState.account),
+      async addKeepToVault() {
+        try {
+          vaultsService.addKeepToVault(state.vault, props.keep)
+          state.vault = {}
+          Pop.toast('Added to Vault', 'success')
+        } catch (error) {
+          Pop.toast(error, 'error')
+        }
+      }
     }
   }
 }
