@@ -1,5 +1,5 @@
 <template>
-  <div class="">
+  <div class="container-fluid">
     <h1>This is the vault page</h1>
   </div>
 </template>

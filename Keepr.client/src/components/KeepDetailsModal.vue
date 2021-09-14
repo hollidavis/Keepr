@@ -47,6 +47,7 @@
                 <div class="row">
                   <div class="col-12 d-flex align-items-center justify-content-center">
                     <div class="row w-100">
+                      <!-- Vault/Delete -->
                       <div class="col-md-6 d-flex align-items-center justify-content-center pt-2">
                         <!-- Vault Form -->
                         <form @submit.prevent="addKeepToVault" class="d-flex mr-auto">
@@ -61,17 +62,17 @@
                               </option>
                             </select>
                           </div>
-                          <button type="submit" class="btn text-primary py-0 px-2">
+                          <button type="submit" class="btn text-primary py-0 px-2" title="Submit">
                             <span class="fas fa-save fa-lg"></span>
                           </button>
                         </form>
                         <!-- Delete -->
-                        <button type="button" class="btn text-danger py-0 px-2" @click.stop="deleteKeep" v-if="keep.creatorId == account.id">
+                        <button type="button" class="btn text-danger py-0 px-2" :title="'Delete '+ keep.name" @click.stop="deleteKeep" v-if="keep.creatorId == account.id">
                           <span class="fas fa-trash-alt fa-lg"></span>
                         </button>
                       </div>
                       <!-- Creator Info -->
-                      <div class="col-md-6 d-flex align-items-center justify-content-center pb-2">
+                      <div class="col-md-6 d-flex align-items-center justify-content-center pb-2 pointer" :title="'Go To '+ keep.creator.name + ' Profile Page'" @click.stop="profile">
                         <p class="m-0 px-2 mr-auto">
                           {{ keep.creator.name }}
                         </p>
@@ -97,6 +98,7 @@ import Pop from '../utils/Notifier'
 import { vaultsService } from '../services/VaultsService'
 import $ from 'jquery'
 import { keepsService } from '../services/KeepsService'
+import { router } from '../router'
 export default {
   props: {
     keep: {
@@ -131,6 +133,10 @@ export default {
         } catch (error) {
           Pop.toast(error, 'error')
         }
+      },
+      profile() {
+        $('#KeepDetailsModal' + props.keep.id).modal('hide')
+        router.push({ name: 'Profile', params: { id: props.keep.creator.id } })
       }
     }
   }

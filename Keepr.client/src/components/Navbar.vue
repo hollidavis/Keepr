@@ -21,8 +21,8 @@
     <div class="collapse navbar-collapse" id="navbarText">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item">
-          <router-link :to="{ name: 'Home' }" class="nav-link">
-            Home
+          <router-link :to="{ name: 'Profile', params: {id: account.id} }" class="nav-link">
+            Profile
           </router-link>
         </li>
       </ul>
@@ -54,11 +54,6 @@
             @click="state.dropOpen = false"
             v-if="account.id"
           >
-            <router-link :to="{ name: 'Profile', params: {id: account.id} }">
-              <div class="list-group-item list-group-item-action hoverable">
-                Profile
-              </div>
-            </router-link>
             <div
               class="list-group-item list-group-item-action hoverable text-uppercase"
               @click="logout"

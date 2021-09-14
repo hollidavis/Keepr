@@ -17,7 +17,6 @@ class KeepsService {
     await api.delete('api/keeps/' + id)
     const found = AppState.keeps.filter(k => k.id !== id)
     AppState.keeps = found
-    console.log(found)
   }
 }
 
