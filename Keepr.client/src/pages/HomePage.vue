@@ -62,10 +62,4 @@ export default {
         column-count: 4;
     }
 }
-
-// @media (min-width: 1200px) {
-//     .card-columns {
-//         column-count: 5;
-//     }
-// }
 </style>

@@ -22,8 +22,8 @@
         <KeepCard :keep="k" />
       </div>
     </div>
-    <NewKeepModal />
   </div>
+  <NewKeepModal />
 </template>
 
 <script>

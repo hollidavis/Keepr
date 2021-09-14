@@ -28,11 +28,9 @@ export default {
     const route = useRoute()
     watchEffect(() => {
       try {
-        if (route.params.id) {
-          accountService.getProfileById(route.params.id)
-          accountService.getVaultsByProfileId(route.params.id)
-          accountService.getKeepsByProfileId(route.params.id)
-        }
+        accountService.getProfileById(route.params.id)
+        accountService.getVaultsByProfileId(route.params.id)
+        accountService.getKeepsByProfileId(route.params.id)
       } catch (error) {
         Pop.toast(error, 'error')
       }

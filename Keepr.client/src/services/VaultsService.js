@@ -2,6 +2,11 @@ import { AppState } from '../AppState'
 import { api } from './AxiosService'
 
 class VaultsService {
+  async getById(id) {
+    const res = await api.get('api/vaults/' + id)
+    AppState.activeVault = res.data
+  }
+
   async addKeepToVault(vault, keep) {
     const body = {
       vaultId: vault.id,

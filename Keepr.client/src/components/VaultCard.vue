@@ -21,7 +21,7 @@ export default {
   setup(props) {
     return {
       vaultDetails() {
-        router.push({ name: 'Vault', params: { id: props.vault.creator.id } })
+        router.push({ name: 'Vault', params: { id: props.vault.id } })
       }
     }
   }
