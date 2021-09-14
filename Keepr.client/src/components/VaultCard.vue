@@ -2,9 +2,9 @@
   <div class="card card-size rounded mt-3">
     <img class="card-img rounded" :src="vault.img" :alt="vault.name">
     <div class="card-img-overlay black-gradient rounded">
-      <h4 class="text-light text-shadow m-0 pointer" @click.stop="vaultDetails">
+      <h3 class="text-light text-shadow m-0 pointer" @click.stop="vaultDetails">
         {{ vault.name }}
-      </h4>
+      </h3>
     </div>
   </div>
 </template>
@@ -30,11 +30,11 @@ export default {
 
 <style lang="scss" scoped>
 .card-size{
-  height: 25vh;
+  height: 20vh;
   width: 100%;
 }
 .card-img{
-  height: 25vh;
+  height: 20vh;
   width: 100%;
   object-fit: cover;
   object-position: center;

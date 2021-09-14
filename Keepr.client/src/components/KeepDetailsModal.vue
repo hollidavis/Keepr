@@ -34,7 +34,7 @@
                 </div>
                 <!-- Keep Text -->
                 <div class="row d-flex justify-content-center flex-grow-1">
-                  <div class="col-9 line-top line-bottom">
+                  <div class="col-9">
                     <h1 class="text-center">
                       {{ keep.name }}
                     </h1>

@@ -2,9 +2,9 @@
   <img class="card-img rounded pointer" :src="keep.img" :alt="keep.name" @click="increaseViewCount">
   <div class="card-img-overlay black-gradient rounded pointer" @click="increaseViewCount">
     <div class="d-flex justify-content-between align-items-center">
-      <h2 class="text-light m-0 text-shadow">
+      <h3 class="text-light m-0 text-shadow">
         {{ keep.name }}
-      </h2>
+      </h3>
       <img class="rounded-pill profile" :src="keep.creator.picture" :alt="keep.creator.name">
     </div>
   </div>
