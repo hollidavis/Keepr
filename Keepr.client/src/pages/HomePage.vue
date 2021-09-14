@@ -1,7 +1,7 @@
 <template>
   <div class="container-fluid">
     <div class="card-columns">
-      <div class="card" v-for="k in keeps" :key="k.id">
+      <div class="card selectable rounded" data-toggle="modal" :data-target="'#KeepDetailsModal'+ k.id" v-for="k in keeps" :key="k.id">
         <KeepCard :keep="k" />
       </div>
     </div>

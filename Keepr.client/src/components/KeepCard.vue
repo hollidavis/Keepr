@@ -1,6 +1,6 @@
 <template>
-  <img class="card-img" :src="keep.img" :alt="keep.name">
-  <div class="card-img-overlay black-gradient">
+  <img class="card-img rounded" :src="keep.img" :alt="keep.name">
+  <div class="card-img-overlay black-gradient rounded">
     <div class="d-flex justify-content-between align-items-center">
       <h2 class="text-light m-0">
         {{ keep.name }}
@@ -8,6 +8,7 @@
       <img class="rounded-pill profile" :src="keep.creator.picture" :alt="keep.creator.name">
     </div>
   </div>
+  <KeepDetailsModal :keep="keep" />
 </template>
 
 <script>
