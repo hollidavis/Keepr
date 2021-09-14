@@ -27,3 +27,11 @@ main {
 .pointer{
   cursor: pointer;
 }
+
+.line-bottom{
+  border-bottom: 2px solid $dark;
+}
+
+.line-bottom{
+  border-top: 2px solid $dark;
+}

@@ -1,10 +1,16 @@
 <template>
-  <div class="">
+  <div class="row">
   </div>
 </template>
 
 <script>
 export default {
+  props: {
+    vaults: {
+      type: Array,
+      required: true
+    }
+  },
   setup() {
     return {}
   }

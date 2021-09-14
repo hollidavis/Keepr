@@ -18,7 +18,7 @@ import { computed, watchEffect } from '@vue/runtime-core'
 import Pop from '../utils/Notifier'
 import { keepsService } from '../services/KeepsService'
 import { AppState } from '../AppState'
-import { vaultsService } from '../services/VaultsService'
+import { accountService } from '../services/AccountService'
 export default {
   setup() {
     watchEffect(async() => {
@@ -31,7 +31,7 @@ export default {
     watchEffect(async() => {
       try {
         if (AppState.account.id) {
-          vaultsService.getVaultsByProfileId(AppState.account.id)
+          accountService.getVaultsByProfileId(AppState.account.id)
         }
       } catch (error) {
         Pop.toast(error, 'error')

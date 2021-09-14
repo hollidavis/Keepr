@@ -34,7 +34,7 @@
                 </div>
                 <!-- Keep Text -->
                 <div class="row d-flex justify-content-center flex-grow-1">
-                  <div class="col-9">
+                  <div class="col-9 line-top line-bottom">
                     <h1 class="text-center">
                       {{ keep.name }}
                     </h1>
@@ -153,8 +153,5 @@ export default {
   min-width: 100%;
   object-fit: cover;
   object-position: center;
-}
-.line{
-  border-bottom: 2px 2px black;
 }
 </style>
