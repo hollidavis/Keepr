@@ -24,7 +24,7 @@
               <div class="col-md-6 d-flex flex-column">
                 <!-- Keep Stats -->
                 <div class="row">
-                  <div class="col-12 d-flex justify-content-center align-items-center">
+                  <div class="col-12 d-flex justify-content-center align-items-center pt-2">
                     <p><span class="fas fa-eye fa-lg"></span> {{ keep.views }}</p>
                     <p class="px-3">
                       <span class="fab fa-korvue fa-lg"></span> {{ keep.keeps }}
@@ -48,9 +48,9 @@
                   <div class="col-12 d-flex align-items-center justify-content-center">
                     <!-- Select Vault -->
                     <div class="row w-100">
-                      <div class="col-md-6 d-flex align-items-center">
-                        <form @submit.prevent="addKeepToVault" class="mr-auto">
-                          <select v-model="state.vault" class="pointer">
+                      <div class="col-md-6 d-flex align-items-center justify-content-center py-2">
+                        <form @submit.prevent="addKeepToVault" class="d-flex mr-auto">
+                          <select v-model="state.vault" class="pointer w-100">
                             <option v-for="v in vaults" :key="v.id" :value="v">
                               {{ v.name }}
                             </option>
@@ -63,12 +63,12 @@
                           </button>
                         </form>
                         <!-- Delete -->
-                        <button type="button" class="btn text-danger py-0 px-2" @click.stop="">
+                        <button type="button" class="btn text-danger py-0 px-2" @click.stop="" v-if="keep.creatorId == account.id">
                           <span class="fas fa-trash-alt fa-lg"></span>
                         </button>
                       </div>
                       <!-- Creator Info -->
-                      <div class="col-md-6 d-flex align-items-center">
+                      <div class="col-md-6 d-flex align-items-center justify-content-center py-2">
                         <p class="m-0 px-2 mr-auto">
                           {{ keep.creator.name }}
                         </p>
@@ -103,7 +103,8 @@ export default {
     })
     return {
       state,
-      vaults: computed(() => AppState.vaults)
+      vaults: computed(() => AppState.vaults),
+      account: computed(() => AppState.account)
     }
   }
 }
