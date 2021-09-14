@@ -1,10 +1,12 @@
 <template>
   <img class="card-img" :src="keep.img" :alt="keep.name">
   <div class="card-img-overlay black-gradient">
-    <h2 class="text-light">
-      {{ keep.name }}
-    </h2>
-    <!-- <img :src="keep.creator.picture" :alt="keep.creator.name"> -->
+    <div class="d-flex justify-content-between align-items-center">
+      <h2 class="text-light m-0">
+        {{ keep.name }}
+      </h2>
+      <img class="rounded-pill profile" :src="keep.creator.picture" :alt="keep.creator.name">
+    </div>
   </div>
 </template>
 
@@ -29,4 +31,8 @@ export default {
   max-height: 50%;
 }
 
+.profile{
+  height: 7vh;
+  width: 7vh;
+}
 </style>
