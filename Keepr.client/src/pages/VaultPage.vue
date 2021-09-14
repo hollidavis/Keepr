@@ -19,7 +19,6 @@ import { computed, watchEffect } from '@vue/runtime-core'
 import { useRoute } from 'vue-router'
 import Pop from '../utils/Notifier'
 import { vaultsService } from '../services/VaultsService'
-import { keepsService } from '../services/KeepsService'
 import { AppState } from '../AppState'
 export default {
   setup() {
@@ -27,7 +26,7 @@ export default {
     watchEffect(() => {
       try {
         vaultsService.getById(route.params.id)
-        // keepsService.getKeepsByVaultId(route.params.id)
+        vaultsService.getKeepsByVaultId(route.params.id)
       } catch (error) {
         Pop.toast(error, 'error')
       }

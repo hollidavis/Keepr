@@ -7,6 +7,12 @@ class VaultsService {
     AppState.activeVault = res.data
   }
 
+  async getKeepsByVaultId(id) {
+    const res = await api.get('api/vaults/' + id + '/keeps')
+    console.log(res.data)
+    AppState.keeps = res.data
+  }
+
   async addKeepToVault(vault, keep) {
     const body = {
       vaultId: vault.id,
