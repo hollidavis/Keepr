@@ -13,7 +13,7 @@
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-        <div class="modal-body p-2">
+        <div class="modal-body p-2" @click.stop="increaseViewCount">
           <div class="container-fluid">
             <div class="row">
               <div class="col-md-6 p-0 d-flex justify-content-start">
@@ -23,16 +23,16 @@
                 <!-- Keep Stats -->
                 <div class="row">
                   <div class="col-12 d-flex justify-content-center">
-                    <p><span class="fas fa-eye"></span> {{ keep.views }}</p>
+                    <p><span class="fas fa-eye fa-lg"></span> {{ keep.views }}</p>
                     <p class="px-3">
-                      <span class="fab fa-korvue"></span> {{ keep.keeps }}
+                      <span class="fab fa-korvue fa-lg"></span> {{ keep.keeps }}
                     </p>
-                    <p><span class="fas fa-share"></span> {{ keep.shares }}</p>
+                    <p><span class="fas fa-share fa-lg"></span> {{ keep.shares }}</p>
                   </div>
                 </div>
                 <!-- Keep Text -->
-                <div class="row justify-content-center align-items-center">
-                  <div class="col-9">
+                <div class="row d-flex justify-content-center align-items-center">
+                  <div class="col-9 d-flex flex-grow-1">
                     <h1 class="text-center">
                       {{ keep.name }}
                     </h1>
@@ -43,30 +43,30 @@
                 </div>
                 <!-- Keep Buttons -->
                 <div class="row">
-                  <div class="col-12 d-flex">
+                  <div class="col-12 d-flex align-items-center">
+                    <!-- Select Vault -->
                     <div>
-                      <form @click.prevent="">
-                        <select name="cars" id="cars" form="carform">
-                          <option value="volvo">
-                            Volvo
+                      <form @submit.prevent="addKeepToVault">
+                        <select v-model="state.vault">
+                          <option v-for="v in vaults" :key="v.id" :value="v">
+                            {{ v.name }}
                           </option>
-                          <option value="saab">
-                            Saab
-                          </option>
-                          <option value="opel">
-                            Opel
-                          </option>
-                          <option value="audi">
-                            Audi
+                          <option v-if="!vaults.length">
+                            No Vaults Yet
                           </option>
                         </select>
+                        <button type="submit" class="btn text-primary p-2">
+                          <span class="fas fa-save fa-lg"></span>
+                        </button>
                       </form>
                     </div>
+                    <!-- Delete -->
                     <div>
-                      <button type="button" class="btn text-danger" @click.prevent="">
-                        <span class="fas fa-trash-alt"></span>
+                      <button type="button" class="btn text-danger p-2" @click.stop="">
+                        <span class="fas fa-trash-alt fa-lg"></span>
                       </button>
                     </div>
+                    <!-- Creator Info -->
                     <div class="d-flex align-items-center">
                       <p class="m-0 pr-2">
                         {{ keep.creator.name }}
@@ -85,6 +85,9 @@
 </template>
 
 <script>
+import { reactive } from '@vue/reactivity'
+import { computed } from '@vue/runtime-core'
+import { AppState } from '../AppState'
 export default {
   props: {
     keep: {
@@ -93,7 +96,13 @@ export default {
     }
   },
   setup() {
-    return {}
+    const state = reactive({
+      vault: {}
+    })
+    return {
+      state,
+      vaults: computed(() => AppState.vaults)
+    }
   }
 }
 </script>
