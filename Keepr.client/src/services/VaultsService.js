@@ -13,6 +13,8 @@ class VaultsService {
       keepId: keep.id
     }
     await api.post('api/vaultkeeps', body)
+    const found = AppState.keeps.find(k => k.id === keep.id)
+    found.keeps++
   }
 }
 

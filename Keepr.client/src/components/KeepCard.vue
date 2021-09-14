@@ -1,6 +1,6 @@
 <template>
-  <img class="card-img rounded pointer" :src="keep.img" :alt="keep.name">
-  <div class="card-img-overlay black-gradient rounded pointer">
+  <img class="card-img rounded pointer" :src="keep.img" :alt="keep.name" @click="increaseViewCount">
+  <div class="card-img-overlay black-gradient rounded pointer" @click="increaseViewCount">
     <div class="d-flex justify-content-between align-items-center">
       <h2 class="text-light m-0">
         {{ keep.name }}
@@ -12,6 +12,8 @@
 </template>
 
 <script>
+import { keepsService } from '../services/KeepsService'
+import Pop from '../utils/Notifier'
 export default {
   props: {
     keep: {
@@ -19,8 +21,16 @@ export default {
       required: true
     }
   },
-  setup() {
-    return {}
+  setup(props) {
+    return {
+      async increaseViewCount() {
+        try {
+          keepsService.GetById(props.keep.id)
+        } catch (error) {
+          Pop.toast(error, 'error')
+        }
+      }
+    }
   }
 }
 </script>
