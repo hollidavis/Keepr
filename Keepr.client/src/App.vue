@@ -5,7 +5,7 @@
   <main>
     <router-view />
   </main>
-  <footer>
+  <footer class="mt-3">
     <div class="bg-primary text-light text-center p-3">
       Made with 💖 by Holli
     </div>

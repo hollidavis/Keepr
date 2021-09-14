@@ -32,6 +32,16 @@ main {
   border-bottom: 2px solid $dark;
 }
 
-.line-bottom{
+.line-top{
   border-top: 2px solid $dark;
+}
+
+.black-gradient{
+  background-image: linear-gradient(rgb(0, 0, 0), rgba(0, 0, 0, 0));
+  min-height: 25%;
+  max-height: 50%;
+}
+
+.text-shadow{
+text-shadow: 1px 1px 2px black;
 }

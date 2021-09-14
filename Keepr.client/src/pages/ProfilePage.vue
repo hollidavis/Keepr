@@ -4,7 +4,9 @@
       <div class="col-md-12 d-flex">
         <img :src="profile.picture" :alt="profile.name" class="profile rounded">
         <div class="ml-4 text-break">
-          <h1>{{ profile.name }}</h1>
+          <h1 class="line-bottom">
+            {{ profile.name }}
+          </h1>
           <h4>Vaults: {{ vaults.length }}</h4>
           <h4>Keeps: {{ keeps.length }}</h4>
         </div>
