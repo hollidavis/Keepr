@@ -25,7 +25,7 @@ export default {
     return {
       async increaseViewCount() {
         try {
-          keepsService.GetById(props.keep.id)
+          keepsService.getById(props.keep.id)
         } catch (error) {
           Pop.toast(error, 'error')
         }

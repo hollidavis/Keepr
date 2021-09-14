@@ -52,7 +52,7 @@
                         <form @submit.prevent="addKeepToVault" class="d-flex mr-auto">
                           <div class="mb-4">
                             <small :id="'keepHelp'+keep.id" class="text-muted">Add to Vault</small>
-                            <select v-model="state.vault" class="pointer w-100" :aria-describedby="'keepHelp'+keep.id">
+                            <select v-model="state.vault" class="pointer w-100" :aria-describedby="'keepHelp'+keep.id" required>
                               <option v-for="v in vaults" :key="v.id" :value="v">
                                 {{ v.name }}
                               </option>
@@ -66,7 +66,7 @@
                           </button>
                         </form>
                         <!-- Delete -->
-                        <button type="button" class="btn text-danger py-0 px-2" @click.stop="" v-if="keep.creatorId == account.id">
+                        <button type="button" class="btn text-danger py-0 px-2" @click.stop="deleteKeep" v-if="keep.creatorId == account.id">
                           <span class="fas fa-trash-alt fa-lg"></span>
                         </button>
                       </div>
@@ -95,6 +95,8 @@ import { computed } from '@vue/runtime-core'
 import { AppState } from '../AppState'
 import Pop from '../utils/Notifier'
 import { vaultsService } from '../services/VaultsService'
+import $ from 'jquery'
+import { keepsService } from '../services/KeepsService'
 export default {
   props: {
     keep: {
@@ -115,6 +117,17 @@ export default {
           vaultsService.addKeepToVault(state.vault, props.keep)
           state.vault = {}
           Pop.toast('Added to Vault', 'success')
+        } catch (error) {
+          Pop.toast(error, 'error')
+        }
+      },
+      async deleteKeep() {
+        try {
+          if (await Pop.confirm()) {
+            $('#KeepDetailsModal' + props.keep.id).modal('hide')
+            await keepsService.deleteKeep(props.keep.id)
+            Pop.toast('Successfully Deleted', 'error')
+          }
         } catch (error) {
           Pop.toast(error, 'error')
         }

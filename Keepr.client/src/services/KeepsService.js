@@ -7,10 +7,17 @@ class KeepsService {
     AppState.keeps = res.data
   }
 
-  async GetById(id) {
+  async getById(id) {
     await api.get('api/keeps/' + id)
     const found = AppState.keeps.find(k => k.id === id)
     found.views++
+  }
+
+  async deleteKeep(id) {
+    await api.delete('api/keeps/' + id)
+    const found = AppState.keeps.filter(k => k.id !== id)
+    AppState.keeps = found
+    console.log(found)
   }
 }
 
