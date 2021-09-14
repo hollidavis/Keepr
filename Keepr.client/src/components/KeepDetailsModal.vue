@@ -31,8 +31,8 @@
                   </div>
                 </div>
                 <!-- Keep Text -->
-                <div class="row justify-content-center">
-                  <div class="col-8">
+                <div class="row justify-content-center align-items-center">
+                  <div class="col-9">
                     <h1 class="text-center">
                       {{ keep.name }}
                     </h1>
@@ -43,10 +43,36 @@
                 </div>
                 <!-- Keep Buttons -->
                 <div class="row">
-                  <div class="col-12">
-                    <div class="dropdown">
+                  <div class="col-12 d-flex">
+                    <div>
+                      <form @click.prevent="">
+                        <select name="cars" id="cars" form="carform">
+                          <option value="volvo">
+                            Volvo
+                          </option>
+                          <option value="saab">
+                            Saab
+                          </option>
+                          <option value="opel">
+                            Opel
+                          </option>
+                          <option value="audi">
+                            Audi
+                          </option>
+                        </select>
+                      </form>
                     </div>
-                    <img class="rounded-pill profile" :src="keep.creator.picture" :alt="keep.creator.name">
+                    <div>
+                      <button type="button" class="btn text-danger" @click.prevent="">
+                        <span class="fas fa-trash-alt"></span>
+                      </button>
+                    </div>
+                    <div class="d-flex align-items-center">
+                      <p class="m-0 pr-2">
+                        {{ keep.creator.name }}
+                      </p>
+                      <img class="rounded-pill profile" :src="keep.creator.picture" :alt="keep.creator.name">
+                    </div>
                   </div>
                 </div>
               </div>
