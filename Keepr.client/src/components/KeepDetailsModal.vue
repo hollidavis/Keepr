@@ -47,17 +47,20 @@
                 <div class="row">
                   <div class="col-12 d-flex align-items-center justify-content-center">
                     <div class="row w-100">
-                      <div class="col-md-6 d-flex align-items-center justify-content-center py-2">
+                      <div class="col-md-6 d-flex align-items-center justify-content-center pt-2">
                         <!-- Vault Form -->
                         <form @submit.prevent="addKeepToVault" class="d-flex mr-auto">
-                          <select v-model="state.vault" class="pointer w-100">
-                            <option v-for="v in vaults" :key="v.id" :value="v">
-                              {{ v.name }}
-                            </option>
-                            <option v-if="!vaults.length">
-                              No Vaults Yet
-                            </option>
-                          </select>
+                          <div class="mb-4">
+                            <small :id="'keepHelp'+keep.id" class="text-muted">Add to Vault</small>
+                            <select v-model="state.vault" class="pointer w-100" :aria-describedby="'keepHelp'+keep.id">
+                              <option v-for="v in vaults" :key="v.id" :value="v">
+                                {{ v.name }}
+                              </option>
+                              <option v-if="!vaults.length">
+                                No Vaults Yet
+                              </option>
+                            </select>
+                          </div>
                           <button type="submit" class="btn text-primary py-0 px-2">
                             <span class="fas fa-save fa-lg"></span>
                           </button>
@@ -68,7 +71,7 @@
                         </button>
                       </div>
                       <!-- Creator Info -->
-                      <div class="col-md-6 d-flex align-items-center justify-content-center py-2">
+                      <div class="col-md-6 d-flex align-items-center justify-content-center pb-2">
                         <p class="m-0 px-2 mr-auto">
                           {{ keep.creator.name }}
                         </p>
