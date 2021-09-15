@@ -6,7 +6,7 @@
           <h1 class="m-0">
             {{ vault.name }}
           </h1>
-          <button type="button" class="btn text-danger" @click.stop="deleteVault" v-if="vault.creatorId == account.id">
+          <button type="button" class="btn text-danger" @click.stop="deleteVault" v-if="vault.creatorId == account.id" :title="'Delete '+vault.name">
             <span class="fas fa-trash-alt fa-lg"></span>
           </button>
         </div>
@@ -27,7 +27,7 @@
 </template>
 
 <script>
-import { computed, reactive, watchEffect } from '@vue/runtime-core'
+import { computed, onMounted, reactive } from '@vue/runtime-core'
 import { useRoute } from 'vue-router'
 import Pop from '../utils/Notifier'
 import { vaultsService } from '../services/VaultsService'
@@ -39,7 +39,7 @@ export default {
     const state = reactive({
       authorized: false
     })
-    watchEffect(async() => {
+    onMounted(async() => {
       try {
         if (route.params.id && AppState.account.id) {
           await vaultsService.getById(route.params.id)

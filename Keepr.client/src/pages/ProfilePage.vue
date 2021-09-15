@@ -28,7 +28,7 @@ export default {
     const route = useRoute()
     watchEffect(() => {
       try {
-        if (route.params.id) {
+        if (route.params.id && AppState.account.id) {
           accountService.getProfileById(route.params.id)
           accountService.getVaultsByProfileId(route.params.id)
           accountService.getKeepsByProfileId(route.params.id)

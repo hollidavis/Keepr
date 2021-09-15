@@ -1,5 +1,4 @@
 import { AppState } from '../AppState'
-import { router } from '../router'
 import { api } from './AxiosService'
 
 class VaultsService {
@@ -21,6 +20,12 @@ class VaultsService {
     await api.post('api/vaultkeeps', body)
     const found = AppState.keeps.find(k => k.id === keep.id)
     found.keeps++
+  }
+
+  async removeKeepFromVault(id) {
+    await api.delete('api/vaultkeeps/' + id)
+    const found = AppState.keeps.filter(k => k.vaultKeepId !== id)
+    AppState.keeps = found
   }
 
   async createVault(newVault) {
