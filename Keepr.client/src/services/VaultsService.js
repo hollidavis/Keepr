@@ -1,4 +1,5 @@
 import { AppState } from '../AppState'
+import { router } from '../router'
 import { api } from './AxiosService'
 
 class VaultsService {
@@ -9,7 +10,6 @@ class VaultsService {
 
   async getKeepsByVaultId(id) {
     const res = await api.get('api/vaults/' + id + '/keeps')
-    console.log(res.data)
     AppState.keeps = res.data
   }
 
