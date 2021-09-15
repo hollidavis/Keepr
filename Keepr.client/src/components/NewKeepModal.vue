@@ -36,7 +36,7 @@
                      name="description"
                      v-model="state.keep.description"
                      class="form-control"
-                     placeholder="Title..."
+                     placeholder="Description..."
               >
             </div>
             <!-- Img Url -->
