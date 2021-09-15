@@ -20,7 +20,7 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarText">
       <ul class="navbar-nav mr-auto">
-        <li class="nav-item">
+        <li class="nav-item" v-if="account.id">
           <router-link :to="{ name: 'Profile', params: {id: account.id} }" class="nav-link">
             Profile
           </router-link>
