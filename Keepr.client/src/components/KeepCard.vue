@@ -41,7 +41,7 @@ export default {
       },
       async removeKeepFromVault() {
         try {
-          if (await Pop.confirm()) {
+          if (await Pop.confirm('Are you sure?', "You won't be able to revert this!", 'warning', 'Yes, remove from vault!')) {
             vaultsService.removeKeepFromVault(props.keep.vaultKeepId)
             Pop.toast('Successfully Removed', 'error')
           }
