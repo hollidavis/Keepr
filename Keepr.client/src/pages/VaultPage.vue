@@ -41,7 +41,7 @@ export default {
     })
     onMounted(async() => {
       try {
-        if (route.params.id && AppState.account.id) {
+        if (route.params.id) {
           await vaultsService.getById(route.params.id)
           await vaultsService.getKeepsByVaultId(route.params.id)
           state.authorized = true

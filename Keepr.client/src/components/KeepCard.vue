@@ -5,7 +5,7 @@
       {{ keep.name }}
     </h3>
     <img class="rounded-pill profile" :src="keep.creator.picture" :alt="keep.creator.name">
-    <button type="button" class="btn text-danger p-0" v-if="route.params.id == vault.id && vault.creatorId == account.id" @click.stop="removeKeepFromVault" :title="'Remove ' + keep.name + ' from Vault'">
+    <button type="button" class="btn text-danger p-0" v-if="account.id && route.params.id == vault.id && vault.creatorId == account.id" @click.stop="removeKeepFromVault" :title="'Remove ' + keep.name + ' from Vault'">
       <span class="fas fa-times"></span>
     </button>
   </div>

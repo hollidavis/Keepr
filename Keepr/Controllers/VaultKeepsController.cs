@@ -48,7 +48,7 @@ namespace Keepr.Controllers
                 Vault vault = _vaultsService.Get(newVaultKeep.VaultId, newVaultKeep.CreatorId);
                 Keep keep = _keepsService.GetOne(newVaultKeep.KeepId);
                 _keepsService.IncreaseKeepCount(keep);
-                if(vault != null && keep.CreatorId == userInfo.Id){
+                if(vault != null){
                     VaultKeep vaultKeep = _vaultKeepsService.Create(newVaultKeep);
                     return Ok(vaultKeep);
                 } else {
