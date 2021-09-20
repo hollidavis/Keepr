@@ -2,12 +2,12 @@
 {
   "folders": [
     {
-      "path": "Keepr.client",
-      "name": "client"
+      "name": "client",
+      "path": "Keepr.client"
     },
     {
-      "path": "Keepr",
-      "name": "server"
+      "name": "server",
+      "path": "Keepr"
     }
   ],
   "settings": {
